@@ -37,16 +37,14 @@
             <!-- Description of Anxiety Level -->
             <div class="mb-6">
                 <p class="text-md text-gray-600">
-                    {% if anxiety_level == 'None' %}
+                    {% if anxiety_level == 'Not Anxious' %}
                         Your anxiety level is low. You're feeling calm and relaxed. Keep up the good work!
-                    {% elif anxiety_level == 'Mild' %}
+                    {% elif anxiety_level == 'Mildly Anxious' %}
                         You may experience occasional anxious feelings. Consider managing stress through relaxation techniques.
-                    {% elif anxiety_level == 'Moderate' %}
-                        You are experiencing some anxiety. It may be helpful to talk to a professional for guidance.
-                    {% elif anxiety_level == 'Severe' %}
+                    {% elif anxiety_level == 'Highly Anxious' %}
                         Your anxiety levels are quite high. It is recommended to consult a mental health professional for support.
                     {% else %}
-                        Invalid anxiety level.
+                            Invalid anxiety level: {{ anxiety_level }}
                     {% endif %}
                 </p>
             </div>

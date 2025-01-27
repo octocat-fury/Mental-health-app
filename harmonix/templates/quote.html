@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Quote</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/quote.css' %}">
+    <link rel="icon" href="{% static 'images/harmonix.png' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul class="navbar-menu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'chatbot' %}">Chatbot</a></li>
+            <li><a href="{% url 'archives' %}">Archives</a></li>
+        </ul>
+    </nav>
+
+    <!-- Quote Section -->
+    <div class="quote-container">
+        <h1 class="quote-title">Daily Inspiration</h1>
+        <p class="quote-text">"{{ quote }}"</p>
+        <footer class="quote-footer">Stay positive and take care of your mental health!</footer>
+    </div>
+</body>
+</html>

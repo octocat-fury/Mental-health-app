@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/harmonix.png' %}">
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fffbf0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #ff6f61;
+            padding: 1rem;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .navbar a:hover {
+            background-color: #ff3b30;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff6f61;
+            font-size: 3rem;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff3b30;
+        }
+
+        footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 15px;
+            color: #555;
+        }
+    </style>
+    <title>Harmonix</title>
+</head>
+<body>
+   
+    <nav class="navbar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'chatbot' %}">chatbot</a>
+        <a href="{% url 'archives' %}">Archives</a>
+    </nav>
+  
+
+    <div class="container mt-5">
+        <h1>Welcome to Harmonix</h1>
+        <p>Your companion for mental well-being.</p>
+        <a href="/journal/" class="btn">Start Journaling</a>
+        <a href="/resources/" class="btn">Explore Resources</a>
+        <a href="/quote/" class="btn">Quotes</a>
+        <a href="/anxiety_test/" class="btn">Anxiety test</a>
+    </div>
+
+    <footer>
+        &copy; 2024 Harmonix, All rights reserved.
+    </footer>
+</body>
+</html>

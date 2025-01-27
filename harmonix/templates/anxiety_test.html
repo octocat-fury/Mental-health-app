@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anxiety Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{% static 'images/harmonix.png' %}">
+</head>
+
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between">
+            <h1 class="text-white text-2xl font-bold">Anxiety Test</h1>
+            <a href="{% url 'home' %}" class="text-white hover:text-blue-200">Home</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-10">
+        <div class="bg-white rounded-lg shadow p-8">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Take the Anxiety Test</h2>
+
+            <form action="{% url 'submit_test' %}" method="POST" class="space-y-6">
+                {% csrf_token %}
+                <!-- Question 1 -->
+                <div>
+                    <label class="block font-medium text-gray-700">1. I feel nervous, anxious, or on edge.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q1" value="0" required> Never</label>
+                        <label><input type="radio" name="q1" value="1"> Rarely</label>
+                        <label><input type="radio" name="q1" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q1" value="3"> Often</label>
+                        <label><input type="radio" name="q1" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div>
+                    <label class="block font-medium text-gray-700">2. I worry too much about different things.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q2" value="0" required> Never</label>
+                        <label><input type="radio" name="q2" value="1"> Rarely</label>
+                        <label><input type="radio" name="q2" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q2" value="3"> Often</label>
+                        <label><input type="radio" name="q2" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div>
+                    <label class="block font-medium text-gray-700">3. I have trouble relaxing.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q3" value="0" required> Never</label>
+                        <label><input type="radio" name="q3" value="1"> Rarely</label>
+                        <label><input type="radio" name="q3" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q3" value="3"> Often</label>
+                        <label><input type="radio" name="q3" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div>
+                    <label class="block font-medium text-gray-700">4. I feel easily annoyed or irritable.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q4" value="0" required> Never</label>
+                        <label><input type="radio" name="q4" value="1"> Rarely</label>
+                        <label><input type="radio" name="q4" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q4" value="3"> Often</label>
+                        <label><input type="radio" name="q4" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div>
+                    <label class="block font-medium text-gray-700">5. I feel afraid, as if something awful might happen.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q5" value="0" required> Never</label>
+                        <label><input type="radio" name="q5" value="1"> Rarely</label>
+                        <label><input type="radio" name="q5" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q5" value="3"> Often</label>
+                        <label><input type="radio" name="q5" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div>
+                    <label class="block font-medium text-gray-700">6. My heart races or pounds without any reason.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q6" value="0" required> Never</label>
+                        <label><input type="radio" name="q6" value="1"> Rarely</label>
+                        <label><input type="radio" name="q6" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q6" value="3"> Often</label>
+                        <label><input type="radio" name="q6" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div>
+                    <label class="block font-medium text-gray-700">7. I have difficulty concentrating on tasks.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q7" value="0" required> Never</label>
+                        <label><input type="radio" name="q7" value="1"> Rarely</label>
+                        <label><input type="radio" name="q7" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q7" value="3"> Often</label>
+                        <label><input type="radio" name="q7" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div>
+                    <label class="block font-medium text-gray-700">8. I feel tension in my muscles or body.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q8" value="0" required> Never</label>
+                        <label><input type="radio" name="q8" value="1"> Rarely</label>
+                        <label><input type="radio" name="q8" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q8" value="3"> Often</label>
+                        <label><input type="radio" name="q8" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Question 9 -->
+                <div>
+                    <label class="block font-medium text-gray-700">9. I feel faint or lightheaded without reason.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q9" value="0" required> Never</label>
+                        <label><input type="radio" name="q9" value="1"> Rarely</label>
+                        <label><input type="radio" name="q9" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q9" value="3"> Often</label>
+                        <label><input type="radio" name="q9" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div>
+                    <label class="block font-medium text-gray-700">10. I avoid situations that make me anxious.</label>
+                    <div class="mt-2 space-y-2">
+                        <label><input type="radio" name="q10" value="0" required> Never</label>
+                        <label><input type="radio" name="q10" value="1"> Rarely</label>
+                        <label><input type="radio" name="q10" value="2"> Sometimes</label>
+                        <label><input type="radio" name="q10" value="3"> Often</label>
+                        <label><input type="radio" name="q10" value="4"> Always</label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Submit</button>
+            </form>
+        </div>
+    </div>
+ <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

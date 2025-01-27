@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anxiety Test Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{% static 'images/harmonix.png' %}">
+</head>
+
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between">
+            <h1 class="text-white text-2xl font-bold">Anxiety Test Results</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-10">
+        <div class="bg-white rounded-lg shadow p-8">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Your Anxiety Test Results</h2>
+
+            <!-- Display the Total Score -->
+            <div class="mb-4">
+                <p class="text-lg font-medium text-gray-700">Total Score: <span class="font-bold text-blue-600">{{ total_score }}</span></p>
+            </div>
+
+            <!-- Display the Anxiety Level -->
+            <div class="mb-6">
+                <p class="text-lg font-medium text-gray-700">Anxiety Level: <span class="font-bold text-blue-600">{{ anxiety_level }}</span></p>
+            </div>
+
+            <!-- Description of Anxiety Level -->
+            <div class="mb-6">
+                <p class="text-md text-gray-600">
+                    {% if anxiety_level == 'None' %}
+                        Your anxiety level is low. You're feeling calm and relaxed. Keep up the good work!
+                    {% elif anxiety_level == 'Mild' %}
+                        You may experience occasional anxious feelings. Consider managing stress through relaxation techniques.
+                    {% elif anxiety_level == 'Moderate' %}
+                        You are experiencing some anxiety. It may be helpful to talk to a professional for guidance.
+                    {% elif anxiety_level == 'Severe' %}
+                        Your anxiety levels are quite high. It is recommended to consult a mental health professional for support.
+                    {% else %}
+                        Invalid anxiety level.
+                    {% endif %}
+                </p>
+            </div>
+
+            <!-- Option to Retake Test -->
+            <div class="mt-4">
+                <a href="{% url 'submit_test' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Retake the Test</a>
+                <a href="{% url 'home' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

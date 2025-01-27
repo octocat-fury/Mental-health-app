@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Emotion Analysis</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/image_analyze.css' %}">
+    <link rel="icon" href="{% static 'images/harmonix.png' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Analyzer</h1>
+        <form method="POST" action="/detect-emotion/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="image-upload">
+                <label for="image-upload-input">Upload an Image:</label>
+                <input type="file" id="image-upload-input" name="uploaded_image" accept="image/*" onchange="previewImage(event)">
+            </div>
+            <div class="preview-container">
+                <p>Image Preview:</p>
+                <img id="image-preview" src="#" alt="Image Preview" style="display: none;">
+            </div>
+            <button type="submit" class="analyze-button">Analyze Emotion</button>
+        </form>
+    </div>
+    <script>
+        function previewImage(event) {
+            const preview = document.getElementById('image-preview');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "#";
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+    {% if emotion %}
+<div class="result">
+    <h2>Detected Emotion: {{ emotion|title }}</h2>
+    <ul>
+        {% for recommendation in recommendations %}
+            <li>{{ recommendation }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+</body>
+</html>

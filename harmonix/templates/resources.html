@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Articles</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{% static 'images/harmonix.png' %}">
+</head>
+<body class="bg-gray-100 text-gray-800 font-roboto">
+<nav class="bg-blue-600 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between">
+
+            <a href="{% url 'home' %}" class="text-white hover:text-blue-200" style="font-size:26px">Home</a>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-6 shadow-md">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold">Mental Health Articles</h1>
+            <p class="mt-2 text-lg">Explore insightful articles to support your mental well-being.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Article 1 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="{% static 'images/woman_book.jpg' %}"
+                     alt="Article 1"
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-blue-600">The Importance of Self-Care</h2>
+                    <p class="text-gray-700 mt-2">
+                        Discover why self-care is crucial for your mental health and learn simple ways to prioritize yourself in daily life.
+                    </p>
+                    <a href="https://www.snhu.edu/about-us/newsroom/health/what-is-self-care" class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" target="_blank">Read More</a>
+                </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="{% static 'images/anxiety.jpg' %}"
+                     alt="Article 2"
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-blue-600">Managing Anxiety in Stressful Times</h2>
+                    <p class="text-gray-700 mt-2">
+                        Practical strategies to handle anxiety effectively, especially during challenging situations in life.
+                    </p>
+                    <a href="https://www.healthline.com/nutrition/16-ways-relieve-stress-anxiety" class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" target="_blank">Read More</a>
+                </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="{% static 'images/depression.jpg' %}"
+                     alt="Article 3"
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-blue-600">Understanding Depression</h2>
+                    <p class="text-gray-700 mt-2">
+                        A deep dive into the signs, causes, and ways to seek help for depression.
+                    </p>
+                    <a href="https://www.psychiatry.org/patients-families/depression/what-is-depression" class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" target="_blank">Read More</a>
+                </div>
+            </div>
+
+            <!-- Article 4 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="{% static 'images/exercise.jpg' %}"
+                     alt="Article 4"
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-blue-600">The Role of Exercise in Mental Health</h2>
+                    <p class="text-gray-700 mt-2">
+                        Learn how physical activity can improve your mental health and boost your overall well-being.
+                    </p>
+                    <a href="https://www.helpguide.org/wellness/fitness/the-mental-health-benefits-of-exercise" class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" target="_blank">Read More</a>
+                </div>
+            </div>
+
+            <!-- Article 5 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="{% static 'images/mindful.jpg' %}"
+                     alt="Article 5"
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-blue-600">The Power of Mindfulness</h2>
+                    <p class="text-gray-700 mt-2">
+                        Explore how mindfulness practices can help you stay grounded and reduce stress in your daily life.
+                    </p>
+                    <a href="https://www.apa.org/monitor/2012/07-08/ce-corner" class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" target="_blank">Read More</a>
+                </div>
+            </div>
+
+            <!-- Article 6 -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+                     alt="Article 6"
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-blue-600">Building Support Systems</h2>
+                    <p class="text-gray-700 mt-2">
+                        Tips for creating strong social connections and support networks for mental health resilience.
+                    </p>
+                    <a href="https://mentalhealthcommission.ca/blog-posts/36678-how-building-a-support-system-helps-my-mental-health/" class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" target="_blank">Read More</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-700 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 harmonix. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

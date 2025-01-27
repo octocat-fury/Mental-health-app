@@ -1,0 +1,74 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: url('../images/slide3.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar-menu li {
+    margin: 0 15px;
+}
+
+.navbar-menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-menu a:hover {
+    color: #ff6f61;
+}
+
+/* Quote Container Styles */
+.quote-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh; /* Adjust height to fit below navbar */
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+    padding: 20px;
+}
+
+.quote-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #ff6f61;
+}
+
+.quote-text {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 20px;
+    max-width: 80%;
+}
+
+.quote-footer {
+    font-size: 1rem;
+    margin-top: 20px;
+    color: #ddd;
+}

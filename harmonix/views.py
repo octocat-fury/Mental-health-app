@@ -62,17 +62,74 @@ def login(request):
 
     return render(request, 'login.html')
 
+
+from django.shortcuts import render, redirect
+from textblob import TextBlob  # Import sentiment analysis library
+
+
 def journal(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         text = request.POST.get('journal_entry')
         image = request.FILES.get('journal_image')
-        JournalEntry.objects.create(title=title, entry_text=text, entry_image=image)
-        return redirect('archives')  # Redirect to the archives page after submission
-    return render(request, 'journal.html', {'title': 'Journal'})
+
+        # Create journal entry and save
+        entry = JournalEntry.objects.create(title=title, entry_text=text, entry_image=image)
+
+        # Perform sentiment analysis
+        analyze_sentiment(entry)
+
+        return redirect('archives')  # Redirect after submission
+
+    # Fetch all journal entries to display
+    journal_entries = JournalEntry.objects.all().order_by('-created_at')
+
+    return render(request, 'journal.html', {'title': 'Journal', 'journal_entries': journal_entries})
+
+
+def analyze_sentiment(entry):
+    """
+    Perform sentiment analysis on a journal entry.
+    """
+    analysis = TextBlob(entry.entry_text)  # Analyze text
+    entry.sentiment_score = analysis.sentiment.polarity  # Save polarity (-1 to 1)
+    entry.save()
+
+
+
+
+from .models import JournalEntry
+from collections import Counter
+
 def archives(request):
-    entries = JournalEntry.objects.order_by('-created_at')  # Show newest entries first
-    return render(request, 'archives.html', {'entries': entries, 'title': 'Archives'})
+    """
+    Display all journal entries with sentiment analysis and pass data for visualization.
+    """
+    entries = JournalEntry.objects.order_by('-created_at')  # Show newest first
+
+    # Analyze sentiment for each entry (only if not already analyzed)
+    for entry in entries:
+        if entry.sentiment_score == 0.0:
+            entry.analyze_sentiment()
+
+    # Categorize sentiments
+    sentiment_counts = Counter(entry.sentiment_label() for entry in entries)
+
+    # Prepare data for visualization
+    sentiment_data = {
+        "Happy": sentiment_counts.get("Happy 😊", 0),
+        "Neutral": sentiment_counts.get("Neutral 😐", 0),
+        "Sad": sentiment_counts.get("Sad 😔", 0),
+        "Angry": sentiment_counts.get("Angry 😡", 0),
+    }
+
+    return render(request, 'archives.html', {
+        'entries': entries,
+        'title': 'Archives',
+        'sentiment_data': sentiment_data,  # Pass data to the template
+    })
+
+
 
 
 # chatbot/views.py
@@ -196,6 +253,8 @@ def results(request):
         'total_score': response.total_score,
         'anxiety_level': response.anxiety_level
     })
+
+
 
 
 

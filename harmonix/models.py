@@ -4,11 +4,38 @@ class User(models.Model):
     password=models.CharField(max_length=50)
     def _str_(self):
         return self.username
+
+
+from django.db import models
+from textblob import TextBlob  # Sentiment analysis library
+
 class JournalEntry(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)
     entry_text = models.TextField()
     entry_image = models.ImageField(upload_to='journal_images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    sentiment_score = models.FloatField(default=0.0)  # Store sentiment analysis score
+
+    def analyze_sentiment(self):
+        """
+        Perform sentiment analysis on the journal entry text.
+        """
+        analysis = TextBlob(self.entry_text)  # Analyze text
+        self.sentiment_score = analysis.sentiment.polarity  # Assign polarity score (-1 to 1)
+        self.save()  # Save updated sentiment score
+
+    def sentiment_label(self):
+        """
+        Classifies sentiment into categories: Happy, Neutral, Sad, Angry.
+        """
+        if self.sentiment_score > 0.3:
+            return "Happy 😊"
+        elif -0.3 <= self.sentiment_score <= 0.3:
+            return "Neutral 😐"
+        elif self.sentiment_score < -0.6:
+            return "Angry 😡"
+        else:
+            return "Sad 😔"
 
     def __str__(self):
         return self.title if self.title else f"Journal Entry {self.id}"

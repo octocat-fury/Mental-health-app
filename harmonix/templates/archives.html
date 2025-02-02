@@ -6,29 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/archives.css' %}">
     <link rel="icon" href="{% static 'images/harmonix.png' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+    <title>Archives</title>
 </head>
 <body>
+
+    <!-- Navbar -->
     <nav class="navbar">
         <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'register' %}">Register</a>
         <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'chatbot' %}">chatbot</a>
+        <a href="{% url 'chatbot' %}">Chatbot</a>
         <a href="{% url 'archives' %}">Archives</a>
     </nav>
+
+    <!-- Entries Section -->
     <div class="archives-container">
         <h1>{{ title }}</h1>
         <div class="entries">
             {% for entry in entries %}
-                <div class="entry-card">
-                    <h2>{{ entry.title|default:"Untitled Entry" }}</h2>
-                    <p>{{ entry.entry_text }}</p>
+                <div class="entry-card bg-white p-4 shadow rounded-lg mb-4">
+                    <h2 class="text-xl font-bold">{{ entry.title|default:"Untitled Entry" }}</h2>
+                    <p class="text-gray-700">{{ entry.entry_text }}</p>
+
                     {% if entry.entry_image %}
-                        <img src="{{ entry.entry_image.url }}" alt="Journal Image">
+                        <img src="{{ entry.entry_image.url }}" alt="Journal Image" class="mt-2 rounded-lg">
                     {% endif %}
-                    <small>Created on {{ entry.created_at|date:"F j, Y, g:i a" }}</small>
+
+                    <p class="mt-2 text-sm">Created on {{ entry.created_at|date:"F j, Y, g:i a" }}</p>
+
+                    <!-- Sentiment Analysis -->
+                    <p class="mt-2 text-sm">
+                        Sentiment Score:
+                        <span class="{% if entry.sentiment_score > 0.3 %}text-green-500
+                                     {% elif entry.sentiment_score < -0.6 %}text-red-600
+                                     {% elif entry.sentiment_score < -0.3 %}text-yellow-500
+                                     {% else %}text-gray-500{% endif %}">
+                            {{ entry.sentiment_score }}
+                        </span>
+                    </p>
+
+                    <!-- Sentiment Label -->
+                    <p class="mt-1 text-sm font-bold">
+                        Mood: <span class="font-semibold">{{ entry.sentiment_label }}</span>
+                    </p>
                 </div>
+            {% empty %}
+                <p class="text-gray-500">No journal entries found.</p>
             {% endfor %}
         </div>
     </div>
+
 </body>
 </html>

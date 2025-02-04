@@ -98,8 +98,12 @@ def analyze_sentiment(entry):
 
 
 
-from .models import JournalEntry
+
+
+
 from collections import Counter
+
+from .models import JournalEntry
 
 def archives(request):
     """
@@ -112,7 +116,7 @@ def archives(request):
         if entry.sentiment_score == 0.0:
             entry.analyze_sentiment()
 
-    # Categorize sentiments
+    # Categorize sentiments including Fear 😨
     sentiment_counts = Counter(entry.sentiment_label() for entry in entries)
 
     # Prepare data for visualization
@@ -120,6 +124,7 @@ def archives(request):
         "Happy": sentiment_counts.get("Happy 😊", 0),
         "Neutral": sentiment_counts.get("Neutral 😐", 0),
         "Sad": sentiment_counts.get("Sad 😔", 0),
+        "Fear": sentiment_counts.get("Fear 😨", 0),
         "Angry": sentiment_counts.get("Angry 😡", 0),
     }
 
@@ -128,8 +133,6 @@ def archives(request):
         'title': 'Archives',
         'sentiment_data': sentiment_data,  # Pass data to the template
     })
-
-
 
 
 # chatbot/views.py

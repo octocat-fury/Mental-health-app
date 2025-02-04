@@ -26,20 +26,21 @@ class JournalEntry(models.Model):
 
     def sentiment_label(self):
         """
-        Classifies sentiment into categories: Happy, Neutral, Sad, Angry.
+        Classifies sentiment into categories: Happy, Neutral, Sad, Angry, Fear.
         """
         if self.sentiment_score > 0.3:
             return "Happy 😊"
         elif -0.3 <= self.sentiment_score <= 0.3:
             return "Neutral 😐"
-        elif self.sentiment_score < -0.6:
-            return "Angry 😡"
-        else:
+        elif -0.6 <= self.sentiment_score < -0.3:
             return "Sad 😔"
+        elif -0.85 <= self.sentiment_score < -0.6:
+            return "Fear 😨"
+        else:  # Anything less than -0.85
+            return "Angry 😡"
 
     def __str__(self):
         return self.title if self.title else f"Journal Entry {self.id}"
-
 
 
 

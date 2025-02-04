@@ -8,6 +8,17 @@
     <link rel="icon" href="{% static 'images/harmonix.png' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
     <title>Archives</title>
+    <style>
+    .chart-container {
+        width: 50%; /* Adjust width */
+        max-width: 400px; /* Set max width */
+        margin: auto; /* Center the chart */
+    }
+    canvas {
+        max-width: 100% !important; /* Make sure it resizes */
+        height: auto !important;
+    }
+</style>
 </head>
 <body>
 
@@ -19,6 +30,11 @@
         <a href="{% url 'chatbot' %}">Chatbot</a>
         <a href="{% url 'archives' %}">Archives</a>
     </nav>
+
+    <!-- Sentiment Analysis Chart -->
+    <div class="chart-container">
+        <canvas id="sentimentChart"></canvas>
+    </div>
 
     <!-- Entries Section -->
     <div class="archives-container">
@@ -56,6 +72,43 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- Chart.js Script -->
+    <script>
+        var ctx = document.getElementById('sentimentChart').getContext('2d');
+        var sentimentChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Happy 😊', 'Neutral 😐', 'Sad 😔', 'Fear 😨', 'Angry 😡'],
+                datasets: [{
+                    label: 'Sentiment Analysis',
+                    data: [
+                        {{ sentiment_data.Happy }},
+                        {{ sentiment_data.Neutral }},
+                        {{ sentiment_data.Sad }},
+                        {{ sentiment_data.Fear }},
+                        {{ sentiment_data.Angry }}
+                    ],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)',  // Happy (Green)
+                        'rgba(201, 203, 207, 0.6)', // Neutral (Gray)
+                        'rgba(255, 206, 86, 0.6)',  // Sad (Yellow)
+                        'rgba(153, 102, 255, 0.6)', // Fear (Purple)
+                        'rgba(255, 99, 132, 0.6)'   // Angry (Red)
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>

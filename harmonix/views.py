@@ -63,7 +63,7 @@ def login(request):
     return render(request, 'login.html')
 
 
-from django.shortcuts import render, redirect
+
 from textblob import TextBlob  # Import sentiment analysis library
 
 
@@ -103,7 +103,7 @@ def analyze_sentiment(entry):
 
 from collections import Counter
 
-from .models import JournalEntry
+
 
 def archives(request):
     """
@@ -160,6 +160,15 @@ def quote_view(request):
         "Out of difficulties grow miracles. - Jean de La Bruyere",
         "Embrace uncertainty. - Unknown",
         "Rest and self-care are so important. - Kris Carr",
+        "You, yourself, as much as anybody in the entire universe, deserve your love and affection. - Buddha",
+        "Breathe. You’re going to be okay. - Unknown",
+        "Healing doesn’t mean the damage never existed. It means the damage no longer controls your life. - Akshay Dubey",
+        "No storm, not even the one in your life, can last forever. - Iyanla Vanzant",
+        "Self-compassion is simply giving the same kindness to ourselves that we would give to others. - Christopher Germer",
+        "Courage doesn’t always roar. Sometimes courage is the quiet voice at the end of the day saying, ‘I will try again tomorrow.’ - Mary Anne Radmacher",
+        "You don’t have to see the whole staircase, just take the first step. - Martin Luther King Jr.",
+        "The greatest discovery of all time is that a person can change their future by merely changing their attitude. - Oprah Winfrey",
+        "You are enough just as you are. - Meghan Markle",
     ]
 
     # Use the day of the year to pick a quote
@@ -217,7 +226,7 @@ def nami_home(request):
 
 
 
-from .models import AnxietyTestResponse
+
 
 
 

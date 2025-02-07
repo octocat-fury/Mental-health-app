@@ -12,50 +12,63 @@
 </head>
 
 <body class="bg-gray-100">
-    <!-- Navbar -->
-    <nav class="bg-blue-600 p-4 shadow-lg">
-        <div class="container mx-auto flex justify-between">
-            <h1 class="text-white text-2xl font-bold">Anxiety Test Results</h1>
+<!-- Navbar -->
+<nav class="bg-blue-600 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between">
+        <h1 class="text-white text-2xl font-bold">Anxiety Test Results</h1>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mx-auto mt-10">
+    <div class="bg-white rounded-lg shadow p-8">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Your Anxiety Test Results</h2>
+
+        <!-- Display the Total Score -->
+        <div class="mb-4">
+            <p class="text-lg font-medium text-gray-700">Total Score: <span class="font-bold text-blue-600">{{ total_score }}</span>
+            </p>
         </div>
-    </nav>
 
-    <!-- Main Content -->
-    <div class="container mx-auto mt-10">
-        <div class="bg-white rounded-lg shadow p-8">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">Your Anxiety Test Results</h2>
+        <!-- Display the Anxiety Level -->
+        <div class="mb-6">
+            <p class="text-lg font-medium text-gray-700">Anxiety Level: <span class="font-bold text-blue-600">{{ anxiety_level }}</span>
+            </p>
+        </div>
 
-            <!-- Display the Total Score -->
-            <div class="mb-4">
-                <p class="text-lg font-medium text-gray-700">Total Score: <span class="font-bold text-blue-600">{{ total_score }}</span></p>
+        <!-- Description of Anxiety Level -->
+        <div class="mb-6">
+            <p class="text-md text-gray-600">
+                {% if anxiety_level == 'Not Anxious' %}
+                Your anxiety level is low. You're feeling calm and relaxed. Keep up the good work!
+                {% elif anxiety_level == 'Mildly Anxious' %}
+                You may experience occasional anxious feelings. Consider managing stress through relaxation techniques.
+                {% elif anxiety_level == 'Highly Anxious' %}
+                Your anxiety levels are quite high. It is recommended to consult a mental health professional for
+                support.
+                {% else %}
+                Invalid anxiety level: {{ anxiety_level }}
+                {% endif %}
+            </p>
+        </div>
+
+        <!-- Option to Retake Test -->
+        <div class="mt-4">
+            <a href="{% url 'submit_test' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Retake
+                the Test</a>
+            <a href="{% url 'home' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Home</a>
+            {% if anxiety_level == 'Mildly Anxious' or anxiety_level == 'Highly Anxious' %}
+            <div class="mt-6">
+                <a href="https://www.youtube.com/watch?v=s9zZr2KRvzs" target="_blank" rel="noopener noreferrer"
+                   class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500">
+                    <button>Get Support</button>
+
+                </a>
             </div>
-
-            <!-- Display the Anxiety Level -->
-            <div class="mb-6">
-                <p class="text-lg font-medium text-gray-700">Anxiety Level: <span class="font-bold text-blue-600">{{ anxiety_level }}</span></p>
-            </div>
-
-            <!-- Description of Anxiety Level -->
-            <div class="mb-6">
-                <p class="text-md text-gray-600">
-                    {% if anxiety_level == 'Not Anxious' %}
-                        Your anxiety level is low. You're feeling calm and relaxed. Keep up the good work!
-                    {% elif anxiety_level == 'Mildly Anxious' %}
-                        You may experience occasional anxious feelings. Consider managing stress through relaxation techniques.
-                    {% elif anxiety_level == 'Highly Anxious' %}
-                        Your anxiety levels are quite high. It is recommended to consult a mental health professional for support.
-                    {% else %}
-                            Invalid anxiety level: {{ anxiety_level }}
-                    {% endif %}
-                </p>
-            </div>
-
-            <!-- Option to Retake Test -->
-            <div class="mt-4">
-                <a href="{% url 'submit_test' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Retake the Test</a>
-                <a href="{% url 'home' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Home</a>
-            </div>
+            {% endif %}
         </div>
     </div>
+</div>
 </body>
 
 </html>

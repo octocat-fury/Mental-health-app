@@ -4,35 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/journal.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="{% static 'images/harmonix.png' %}">
     <title>Journal</title>
+    <style>
+        body {
+            background-image: url('{% static "images/journal.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+    </style>
 </head>
-<body>
- <nav class="navbar">
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'register' %}">Register</a>
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'chatbot' %}">chatbot</a>
-        <a href="{% url 'archives' %}">Archives</a>
+<body class="bg-gray-900 bg-opacity-50">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Journal</h1>
+            <div class="space-x-4">
+                <a href="{% url 'home' %}" class="text-white hover:text-gray-300">Home</a>
+                <a href="{% url 'register' %}" class="text-white hover:text-gray-300">Register</a>
+                <a href="{% url 'login' %}" class="text-white hover:text-gray-300">Login</a>
+                <a href="{% url 'chatbot' %}" class="text-white hover:text-gray-300">Chatbot</a>
+                <a href="{% url 'archives' %}" class="text-white hover:text-gray-300">Archives</a>
+            </div>
+        </div>
     </nav>
-    <div class="journal-container">
-        <h1>{{ title }}</h1>
-        <form method="POST" action="/journal/" enctype="multipart/form-data">
+
+    <!-- Journal Container -->
+    <div class="container mx-auto mt-10 p-8 max-w-3xl bg-white bg-opacity-90 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">{{ title }}</h1>
+        <form method="POST" action="/journal/" enctype="multipart/form-data" class="space-y-4">
             {% csrf_token %}
-            <input
-                type="text"
-                name="title"
-                class="journal-title"
+            <input 
+                type="text" 
+                name="title" 
+                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" 
                 placeholder="Entry Title (Optional)">
-            <textarea
-                name="journal_entry"
-                class="journal-textarea"
-                placeholder="How are you feeling today? Write your thoughts here..."
-                required></textarea><br>
-            <label for="image-upload" class="image-upload-label">Optional: Add an image</label>
-            <input type="file" id="image-upload" name="journal_image" accept="image/*" class="image-input"><br>
-            <button type="submit" class="btn">Save Entry</button>
+            <textarea 
+                name="journal_entry" 
+                class="w-full p-3 h-40 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" 
+                placeholder="How are you feeling today? Write your thoughts here..." required></textarea>
+            <label for="image-upload" class="block font-medium text-gray-700">Optional: Add an image</label>
+            <input 
+                type="file" 
+                id="image-upload" 
+                name="journal_image" 
+                accept="image/*" 
+                class="w-full p-2 border rounded-lg bg-gray-100">
+            <button 
+                type="submit" 
+                class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-500 transition">Save Entry</button>
         </form>
     </div>
 </body>
